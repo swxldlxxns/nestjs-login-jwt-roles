@@ -12,7 +12,7 @@ services:
       DB_HOST: nestjsMongodb
       DB_CONNECTION: mongodb
       JWT_SECRET: 1662838156000
-      JWT_EXPIRES_IN: 3m
+      JWT_EXPIRES_IN: 1d
     links:
       - mongodb
     ports:

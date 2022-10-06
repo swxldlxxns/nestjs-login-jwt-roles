@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { ValidationArguments, ValidatorConstraint } from 'class-validator';
 
-import { AuthService } from '../../auth/service/auth.service';
+import { AuthService } from '../../auth/services/auth.service';
 
 @ValidatorConstraint({ name: 'CustomRules', async: true })
 @Injectable()

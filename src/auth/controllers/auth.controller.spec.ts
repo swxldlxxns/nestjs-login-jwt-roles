@@ -5,7 +5,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { RolesEnum } from '../../shared/enums/roles.emun';
 import { CreateUserDto } from '../dto/create-user.dto';
 import { Auth } from '../entities/auth.entity';
-import { AuthService } from '../service/auth.service';
+import { AuthService } from '../services/auth.service';
 import { AuthController } from './auth.controller';
 
 describe('AuthController', () => {

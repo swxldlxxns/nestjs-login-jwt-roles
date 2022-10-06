@@ -6,7 +6,7 @@ import { CustomRules } from '../shared/services/validation.service';
 import { AuthController } from './controllers/auth.controller';
 import { Auth, authSchema } from './entities/auth.entity';
 import { JWT_MODULE } from './interfaces/jwt.register';
-import { AuthService } from './service/auth.service';
+import { AuthService } from './services/auth.service';
 import { JwtStrategy } from './strategies/jwt.strategy';
 
 @Global()

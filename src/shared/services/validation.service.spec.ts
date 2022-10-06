@@ -4,7 +4,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { ValidationArguments } from 'class-validator';
 
 import { Auth } from '../../auth/entities/auth.entity';
-import { AuthService } from '../../auth/service/auth.service';
+import { AuthService } from '../../auth/services/auth.service';
 import { CustomRules } from './validation.service';
 
 describe('CustomRules', () => {

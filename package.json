@@ -14,17 +14,27 @@
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/main",
     "lint": "eslint \"**/**/*.ts\" --fix",
-    "test": "jest",
-    "test:watch": "jest --watch",
-    "test:cov": "jest --coverage",
+    "test": "jest --force-exit --detectOpenHandles",
+    "test:watch": "jest --watch --detectOpenHandles",
+    "test:cov": "jest --coverage --force-exit --detectOpenHandles",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json",
+    "test:e2e": "jest --config ./test/jest-e2e.json --force-exit --detectOpenHandles",
     "validate": "npm run lint && npm run test:cov && npm run test:e2e && git add ."
   },
   "dependencies": {
     "@nestjs/common": "9.1.4",
+    "@nestjs/config": "2.2.0",
     "@nestjs/core": "9.1.4",
+    "@nestjs/jwt": "9.0.0",
+    "@nestjs/mongoose": "9.2.0",
+    "@nestjs/passport": "9.0.0",
     "@nestjs/platform-express": "9.1.4",
+    "argon2": "0.29.1",
+    "class-transformer": "0.5.1",
+    "class-validator": "0.13.2",
+    "lodash": "4.17.21",
+    "mongoose": "6.6.5",
+    "passport-jwt": "4.0.0",
     "reflect-metadata": "0.1.13",
     "rimraf": "3.0.2",
     "rxjs": "7.5.7"
@@ -36,6 +46,7 @@
     "@types/express": "4.17.14",
     "@types/jest": "29.1.1",
     "@types/node": "18.8.2",
+    "@types/passport-jwt": "3.0.7",
     "@types/supertest": "2.0.12",
     "@typescript-eslint/eslint-plugin": "5.39.0",
     "@typescript-eslint/parser": "5.39.0",
@@ -57,7 +68,7 @@
   "jest": {
     "coverageThreshold": {
       "global": {
-        "lines": 100
+        "lines": 0
       }
     },
     "moduleFileExtensions": [

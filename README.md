@@ -4,36 +4,28 @@
 
 ## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+> This project is with NestJs, Docker, MongoDB with Login, JWT and Roles.
 
 ## Installation
 
 ```bash
-$ npm install
+npm install
 ```
 
 ## Running the app
 
 ```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+docker-compose up --build
 ```
 
-## Test
+## Unit Tests
 
 ```bash
-# unit tests
-$ npm run test
+npm run test
+```
 
-# e2e tests
-$ npm run test:e2e
+## Test coverage
 
-# test coverage
-$ npm run test:cov
+```bash
+npm run test:cov
 ```

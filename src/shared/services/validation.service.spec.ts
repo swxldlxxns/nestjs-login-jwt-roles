@@ -16,6 +16,7 @@ describe('CustomRules', () => {
     value: undefined,
   };
   let service: CustomRules;
+  let authService: AuthService;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -31,6 +32,7 @@ describe('CustomRules', () => {
     }).compile();
 
     service = module.get<CustomRules>(CustomRules);
+    authService = module.get<AuthService>(AuthService);
   });
 
   it('should be defined', () => {
@@ -46,6 +48,20 @@ describe('CustomRules', () => {
       args.constraints = ['password'];
       expect(await service.validate('testPassword', args)).toEqual(true);
     });
+    it('property username', async () => {
+      args.property = 'username';
+      jest
+        .spyOn(authService, 'findOne')
+        .mockImplementation(
+          async (): Promise<Auth> => Promise.resolve(undefined),
+        );
+      expect(await service.validate('testUsername', args)).toEqual(true);
+    });
+    it('should return an error', async () => {
+      args.property = 'username';
+      jest.spyOn(authService, 'findOne').mockRejectedValue(new Error());
+      expect(await service.validate('testUsername', args)).toEqual(false);
+    });
   });
   describe('defaultMessage', () => {
     it('confirmPassword', () => {
@@ -53,6 +69,10 @@ describe('CustomRules', () => {
       expect(service.defaultMessage(args)).toEqual(
         'confirmPassword must be equal to password',
       );
+    });
+    it('username', () => {
+      args.property = 'username';
+      expect(service.defaultMessage(args)).toEqual('username already exists');
     });
   });
 });

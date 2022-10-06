@@ -16,8 +16,7 @@ export class CustomRules {
         case 'username':
           return !(await this._authService.findOne({ username: attr }));
       }
-    } catch (e) {
-      console.error(e);
+    } catch {
       return false;
     }
   }

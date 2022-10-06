@@ -40,11 +40,12 @@ export class AuthService {
 
   async create(createUser: CreateUserDto): Promise<Auth> {
     const password = await this._hashPassword(createUser.password);
-    const user: Auth = await this._authModel.create({
+    await this._authModel.create({
       ...createUser,
       password,
     });
-    return omit(user.toObject(), ['password']);
+    const user: Auth = await this.findOne({ username: createUser.username });
+    return omit(user, ['password']);
   }
 
   private async _hashPassword(password: string): Promise<string> {

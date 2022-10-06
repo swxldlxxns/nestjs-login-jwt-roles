@@ -15,9 +15,15 @@ describe('AppController', () => {
     appController = app.get<AppController>(AppController);
   });
 
-  describe('root', () => {
-    it('should return "Hello World!"', () => {
-      expect(appController.getHelloWorld()).toBe('Hello World!');
-    });
+  it('should return "Hello World!"', () => {
+    expect(appController.getHelloWorld()).toBe('Hello World!');
+  });
+
+  it('should return "Hello Role Admin!"', () => {
+    expect(appController.getHelloAdmin()).toBe('Hello Role Admin!');
+  });
+
+  it('should return "Hello Role Develop!"', () => {
+    expect(appController.getHelloDevelop()).toBe('Hello Role Develop!');
   });
 });

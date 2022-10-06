@@ -68,7 +68,7 @@
   "jest": {
     "coverageThreshold": {
       "global": {
-        "lines": 0
+        "lines": 100
       }
     },
     "moduleFileExtensions": [

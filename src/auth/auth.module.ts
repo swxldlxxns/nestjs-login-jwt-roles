@@ -14,6 +14,7 @@ import { JwtStrategy } from './strategies/jwt.strategy';
   controllers: [AuthController],
   imports: [
     JWT_MODULE,
+    PassportModule.register({ defaultStrategy: 'jwt' }),
     MongooseModule.forFeature([
       {
         name: Auth.name,

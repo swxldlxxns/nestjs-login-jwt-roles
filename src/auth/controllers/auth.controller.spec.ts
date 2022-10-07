@@ -81,4 +81,11 @@ describe('AuthController', () => {
       authModelMock,
     );
   });
+
+  it('should delete user', async () => {
+    jest
+      .spyOn(authService, 'delete')
+      .mockImplementation(async (): Promise<boolean> => Promise.resolve(true));
+    expect(await authController.delete('1234')).toBeTruthy();
+  });
 });

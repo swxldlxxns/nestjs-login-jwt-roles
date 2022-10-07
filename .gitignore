@@ -53,3 +53,4 @@ Thumbs.db
 *.wmv
 
 .env
+/mongo_data

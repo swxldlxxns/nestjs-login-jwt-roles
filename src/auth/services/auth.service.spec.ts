@@ -87,6 +87,11 @@ describe('AuthService', () => {
     );
   });
 
+  it('should delete a user', async () => {
+    model.findByIdAndDelete = jest.fn().mockResolvedValue(true);
+    expect(await service.delete('1234')).toBeTruthy();
+  });
+
   describe('login', () => {
     it('should return login', async () => {
       model.findOne = jest.fn().mockImplementation(() => ({

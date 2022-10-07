@@ -25,6 +25,10 @@ export class AuthService {
     return this._authModel.findOne(payload).lean();
   }
 
+  async delete(id: string): Promise<boolean> {
+    return !!this._authModel.findByIdAndDelete(id);
+  }
+
   async login({ username, password }: LoginDto): Promise<string | boolean> {
     const user: Auth = await this.findOne({ username });
     if (!user) return false;

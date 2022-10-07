@@ -21,7 +21,7 @@ services:
       - .:/usr/src/app
       - /usr/src/app/node_modules
   mongodb:
-    container_name: mongodb
+    container_name: nestjsMongodb
     restart: always
     image: mongo
     environment:

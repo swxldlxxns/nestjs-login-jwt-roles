@@ -1,0 +1,33 @@
+version: "3.3"
+services:
+  node:
+    container_name: nestjs
+    restart: always
+    build: .
+    environment:
+      DB_NAME: loginNestjs
+      DB_USE: root
+      DB_PASS: root
+      DB_PORT: 27017
+      DB_HOST: nestjsMongodb
+      DB_CONNECTION: mongodb
+      JWT_SECRET: 1662838156000
+      JWT_EXPIRES_IN: 1d
+    links:
+      - mongodb
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+  mongodb:
+    container_name: nestjsMongodb
+    restart: always
+    image: mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: root
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./mongo_data:/data/db

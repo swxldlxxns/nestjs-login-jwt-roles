@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
+import { AppService } from '../services/app.service';
 import { AppController } from './app.controller';
-import { AppService } from './app.service';
 
 describe('AppController', () => {
   let appController: AppController;
@@ -15,9 +15,15 @@ describe('AppController', () => {
     appController = app.get<AppController>(AppController);
   });
 
-  describe('root', () => {
-    it('should return "Hello World!"', () => {
-      expect(appController.getHello()).toBe('Hello World!');
-    });
+  it('should return "Hello World!"', () => {
+    expect(appController.getHelloWorld()).toBe('Hello World!');
+  });
+
+  it('should return "Hello Role Admin!"', () => {
+    expect(appController.getHelloAdmin()).toBe('Hello Role Admin!');
+  });
+
+  it('should return "Hello Role Develop!"', () => {
+    expect(appController.getHelloDevelop()).toBe('Hello Role Develop!');
   });
 });

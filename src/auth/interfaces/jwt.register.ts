@@ -7,6 +7,7 @@ export const JWT_MODULE = JwtModule.registerAsync({
   inject: [config.KEY],
   useFactory: (configService: ConfigType<typeof config>) => {
     const { secret, expiresIn } = configService.jwt;
+
     return {
       secret,
       signOptions: {

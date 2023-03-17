@@ -15,6 +15,7 @@ export class RolesGuard implements CanActivate {
       metadataKey,
       context.getHandler(),
     );
+
     if (!roles) {
       return true;
     }

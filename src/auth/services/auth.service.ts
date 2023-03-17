@@ -31,8 +31,10 @@ export class AuthService {
 
   async login({ username, password }: LoginDto): Promise<string | boolean> {
     const user: Auth = await this.findOne({ username });
+
     if (!user) return false;
     const verify = await this._verifyPassword(user.password, password);
+
     return verify
       ? this.generate({
           id: user._id,
@@ -44,11 +46,13 @@ export class AuthService {
 
   async create(createUser: CreateUserDto): Promise<Auth> {
     const password = await this._hashPassword(createUser.password);
+
     await this._authModel.create({
       ...createUser,
       password,
     });
     const user: Auth = await this.findOne({ username: createUser.username });
+
     return omit(user, ['password']);
   }
 

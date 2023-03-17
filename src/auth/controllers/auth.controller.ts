@@ -29,8 +29,10 @@ export class AuthController {
   @Post('login')
   async login(@Body() body: LoginDto) {
     const token = await this._authService.login(body);
+
     if (!token)
       throw new HttpException('Wrong credentials', HttpStatus.BAD_REQUEST);
+
     return { token };
   }
 

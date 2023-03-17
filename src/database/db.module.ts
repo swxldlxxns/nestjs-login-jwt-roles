@@ -12,6 +12,7 @@ import config from '../config';
       useFactory: (configService: ConfigType<typeof config>) => {
         const { connection, user, pass, host, port, dbName } =
           configService.database;
+
         return {
           user,
           pass,

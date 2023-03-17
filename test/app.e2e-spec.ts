@@ -35,10 +35,10 @@ describe('Main (e2e)', () => {
       confirmPassword: password,
       role: RolesEnum.ADMIN,
     };
-
     const response = await request(app.getHttpServer())
       .post('/auth/create')
       .send(createUserDtoE2E);
+
     expect(response.status).toEqual(HttpStatus.CREATED);
     expect(response.body).toHaveProperty('username', username);
     id = response.body._id;
@@ -49,10 +49,10 @@ describe('Main (e2e)', () => {
       password,
       username,
     };
-
     const response = await request(app.getHttpServer())
       .post('/auth/login')
       .send(loginDtoE2E);
+
     expect(response.status).toEqual(HttpStatus.CREATED);
     expect(response.body).toHaveProperty('token');
     token = response.body.token;
@@ -60,6 +60,7 @@ describe('Main (e2e)', () => {
 
   it('/ (GET)', async () => {
     const response = await request(app.getHttpServer()).get('/');
+
     expect(response.status).toEqual(HttpStatus.OK);
     expect(response.body).toBeDefined();
   });
@@ -68,6 +69,7 @@ describe('Main (e2e)', () => {
     const response = await request(app.getHttpServer())
       .get('/admin')
       .auth(token, { type: 'bearer' });
+
     expect(response.status).toEqual(HttpStatus.OK);
     expect(response.body).toBeDefined();
   });
@@ -76,6 +78,7 @@ describe('Main (e2e)', () => {
     const response = await request(app.getHttpServer())
       .get('/develop')
       .auth(token, { type: 'bearer' });
+
     expect(response.status).toEqual(HttpStatus.FORBIDDEN);
     expect(response.body.message).toEqual('Forbidden resource');
   });
@@ -84,6 +87,7 @@ describe('Main (e2e)', () => {
     const response = await request(app.getHttpServer())
       .delete(`/auth/${id}`)
       .auth(token, { type: 'bearer' });
+
     expect(response.status).toEqual(HttpStatus.OK);
     expect(response.body).toBeDefined();
     expect(response.body).toBeTruthy();

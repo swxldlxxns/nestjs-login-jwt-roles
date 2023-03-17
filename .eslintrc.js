@@ -64,5 +64,10 @@ module.exports = {
       },
     ],
     'linebreak-style': 0,
+    'newline-after-var': ['error', 'always'],
+    'padding-line-between-statements': [
+      'error',
+      { blankLine: 'always', prev: '*', next: 'return' },
+    ],
   },
 };

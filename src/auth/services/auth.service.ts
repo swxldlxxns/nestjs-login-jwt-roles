@@ -5,8 +5,8 @@ import * as argon2 from 'argon2';
 import { omit } from 'lodash';
 import { Model } from 'mongoose';
 
-import { CreateUserDto } from '../dto/create-user.dto';
-import { LoginDto } from '../dto/login.dto';
+import { CreateUserRequestDto } from '../dto/create-user-request.dto';
+import { LoginRequestDto } from '../dto/login-request.dto';
 import { Auth } from '../entities/auth.entity';
 import { AuthInterface } from '../interfaces/auth.interface';
 
@@ -17,7 +17,7 @@ export class AuthService {
     private readonly _jwtService: JwtService,
   ) {}
 
-  async generate(payload: AuthInterface) {
+  async generate(payload: AuthInterface): Promise<string> {
     return this._jwtService.sign(payload);
   }
 
@@ -29,22 +29,22 @@ export class AuthService {
     return !!this._authModel.findByIdAndDelete(id);
   }
 
-  async login({ username, password }: LoginDto): Promise<string | boolean> {
+  async login({ username, password }: LoginRequestDto): Promise<string> {
     const user: Auth = await this.findOne({ username });
 
-    if (!user) return false;
-    const verify = await this._verifyPassword(user.password, password);
+    if (user && (await this._verifyPassword(user.password, password)))
+      return this.generate({
+        id: user._id,
+        username: user.username,
+        role: user.role,
+      });
 
-    return verify
-      ? this.generate({
-          id: user._id,
-          username: user.username,
-          role: user.role,
-        })
-      : false;
+    return null;
   }
 
-  async create(createUser: CreateUserDto): Promise<Auth> {
+  async create(
+    createUser: CreateUserRequestDto,
+  ): Promise<Auth & { _id: string }> {
     const password = await this._hashPassword(createUser.password);
 
     await this._authModel.create({

@@ -4,25 +4,26 @@ import { getModelToken } from '@nestjs/mongoose';
 import { Test, TestingModule } from '@nestjs/testing';
 
 import { RolesEnum } from '../../shared/enums/roles.emun';
-import { CreateUserDto } from '../dto/create-user.dto';
-import { LoginDto } from '../dto/login.dto';
+import { CreateUserRequestDto } from '../dto/create-user-request.dto';
+import { LoginRequestDto } from '../dto/login-request.dto';
 import { Auth } from '../entities/auth.entity';
 import { AuthService } from '../services/auth.service';
 import { AuthController } from './auth.controller';
 
 describe('AuthController', () => {
   const tokenMock = 'testToken';
-  const createUserDtoMock: CreateUserDto = {
+  const createUserDtoMock: CreateUserRequestDto = {
     confirmPassword: 'test',
     password: 'test',
     role: RolesEnum.ADMIN,
     username: 'test',
   };
-  const loginDtoMock: LoginDto = {
+  const loginDtoMock: LoginRequestDto = {
     password: 'test',
     username: 'test',
   };
-  const authModelMock: Auth = <Auth>{
+  const authModelMock: Auth & { _id: string } = <Auth & { _id: string }>{
+    _id: '1',
     password: 'test',
     role: 'test',
     username: 'test',
@@ -75,7 +76,8 @@ describe('AuthController', () => {
     jest
       .spyOn(authService, 'create')
       .mockImplementation(
-        async (): Promise<Auth> => Promise.resolve(authModelMock),
+        async (): Promise<Auth & { _id: string }> =>
+          Promise.resolve(authModelMock),
       );
     expect(await authController.create(createUserDtoMock)).toEqual(
       authModelMock,

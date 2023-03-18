@@ -2,8 +2,8 @@ import { HttpStatus, INestApplication } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import * as request from 'supertest';
 
-import { CreateUserDto } from '../src/auth/dto/create-user.dto';
-import { LoginDto } from '../src/auth/dto/login.dto';
+import { CreateUserRequestDto } from '../src/auth/dto/create-user-request.dto';
+import { LoginRequestDto } from '../src/auth/dto/login-request.dto';
 import { MainModule } from '../src/main.module';
 import { RolesEnum } from '../src/shared/enums/roles.emun';
 
@@ -29,7 +29,7 @@ describe('Main (e2e)', () => {
   });
 
   it('/auth/create (POST)', async () => {
-    const createUserDtoE2E: CreateUserDto = {
+    const createUserDtoE2E: CreateUserRequestDto = {
       password,
       username,
       confirmPassword: password,
@@ -45,7 +45,7 @@ describe('Main (e2e)', () => {
   });
 
   it('/auth/login (POST)', async () => {
-    const loginDtoE2E: LoginDto = {
+    const loginDtoE2E: LoginRequestDto = {
       password,
       username,
     };

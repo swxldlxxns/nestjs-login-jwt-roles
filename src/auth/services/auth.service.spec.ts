@@ -6,8 +6,8 @@ import { omit } from 'lodash';
 import { Model } from 'mongoose';
 
 import { RolesEnum } from '../../shared/enums/roles.emun';
-import { CreateUserDto } from '../dto/create-user.dto';
-import { LoginDto } from '../dto/login.dto';
+import { CreateUserRequestDto } from '../dto/create-user-request.dto';
+import { LoginRequestDto } from '../dto/login-request.dto';
 import { Auth } from '../entities/auth.entity';
 import { AuthInterface } from '../interfaces/auth.interface';
 import { AuthService } from './auth.service';
@@ -24,11 +24,11 @@ describe('AuthService', () => {
     role: 'test',
     username: 'test',
   };
-  const loginDtoMock: LoginDto = {
+  const loginDtoMock: LoginRequestDto = {
     password: 'test',
     username: 'test',
   };
-  const createUserDtoMock: CreateUserDto = {
+  const createUserDtoMock: CreateUserRequestDto = {
     confirmPassword: 'test',
     password: 'test',
     role: RolesEnum.DEV,

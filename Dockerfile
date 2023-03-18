@@ -1,17 +1,5 @@
-FROM node:16.13.2
-
-RUN mkdir -p /usr/src/app
-
+FROM node:alpine
 WORKDIR /usr/src/app
-
-COPY package*.json ./
-
-RUN npm i -g @nestjs/cli
-
-RUN npm i
-
 COPY . .
-
-EXPOSE 3000
-
+RUN npm i
 CMD ["npm", "run", "start:dev"]

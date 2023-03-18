@@ -1,4 +1,4 @@
-FROM node:16.18.1-alpine3.17
+FROM node:alpine
 WORKDIR /usr/src/app
 COPY . .
 RUN npm i

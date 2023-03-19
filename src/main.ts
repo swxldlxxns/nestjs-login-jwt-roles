@@ -1,4 +1,4 @@
-import { ValidationPipe } from '@nestjs/common';
+import { INestApplication, ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { useContainer } from 'class-validator';
@@ -7,7 +7,7 @@ import { AuthModule } from './auth/auth.module';
 import { MainModule } from './main.module';
 
 async function bootstrap() {
-  const app = await NestFactory.create(MainModule);
+  const app: INestApplication = await NestFactory.create(MainModule);
   const document = SwaggerModule.createDocument(
     app,
     new DocumentBuilder()

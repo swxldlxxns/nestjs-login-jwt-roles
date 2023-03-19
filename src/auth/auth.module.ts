@@ -1,4 +1,4 @@
-import { Global, Module } from '@nestjs/common';
+import { Global, Logger, Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { PassportModule } from '@nestjs/passport';
 
@@ -24,6 +24,6 @@ import { JwtStrategy } from './strategies/jwt.strategy';
     PassportModule,
   ],
   exports: [AuthService],
-  providers: [AuthService, CustomRules, JwtStrategy],
+  providers: [AuthService, CustomRules, JwtStrategy, Logger],
 })
 export class AuthModule {}

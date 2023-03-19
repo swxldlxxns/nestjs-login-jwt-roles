@@ -1,3 +1,4 @@
+import { Logger } from '@nestjs/common';
 import { JwtModule, JwtService } from '@nestjs/jwt';
 import { getModelToken } from '@nestjs/mongoose';
 import { Test, TestingModule } from '@nestjs/testing';
@@ -50,6 +51,7 @@ describe('AuthService', () => {
       ],
       providers: [
         AuthService,
+        Logger,
         {
           provide: getModelToken(Auth.name),
           useValue: Auth,

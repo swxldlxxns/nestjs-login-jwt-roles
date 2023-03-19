@@ -1,4 +1,4 @@
-import { HttpException } from '@nestjs/common';
+import { HttpException, Logger } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { getModelToken } from '@nestjs/mongoose';
 import { Test, TestingModule } from '@nestjs/testing';
@@ -37,6 +37,7 @@ describe('AuthController', () => {
       providers: [
         AuthService,
         JwtService,
+        Logger,
         {
           provide: getModelToken(Auth.name),
           useValue: Auth,
